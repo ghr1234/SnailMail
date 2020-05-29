@@ -55,6 +55,10 @@ Open Issues As of Version 1.8:
 
 ## Change Log ##
 
+### 1.9 ###
+
+* Compiles for 64-bit only. Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+
 ### 1.8 ###
 
 * Records for companies will now match person name as well as company name when searching (as for records for people).

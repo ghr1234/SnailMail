@@ -27,12 +27,12 @@
 
 - (void)setAttributedString:(NSAttributedString *)string
 {
-	[[self textStorage] setAttributedString:[[string copy] autorelease]];
+	[[self textStorage] setAttributedString:[string copy]];
 }
 
 - (NSAttributedString *)attributedString
 {
-    return [[[[self textStorage] attributedSubstringFromRange:NSMakeRange(0, [[self textStorage] length])] copy] autorelease];
+    return [[[self textStorage] attributedSubstringFromRange:NSMakeRange(0, [[self textStorage] length])] copy];
 }
 
 @end

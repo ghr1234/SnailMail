@@ -26,13 +26,13 @@
 
 - (id)init
 {
-    [self initWithPrintInfo:[NSPrintInfo sharedPrintInfo]];
+    if (!(self = [self initWithPrintInfo:[NSPrintInfo sharedPrintInfo]])) return nil;
     return self;
 }
 
 - (id)initWithPrintInfo:(NSPrintInfo *)info
 {
-    [super init];
+    if (!(self = [super init])) return nil;
 
     [self setPrintInfo:info];
 
@@ -45,28 +45,21 @@
     [self setMarginToTop:150];
     [self setMarginToBottom:40];
 	
-	[self setPrefs:[[[NSMutableDictionary alloc] init] autorelease]];
+	[self setPrefs:[[NSMutableDictionary alloc] init]];
 
     return self;
 }
 
-- (void)dealloc
-{
-    [printInfo release];
-	[prefs release];
-
-    [super dealloc];
-}
 
 - (id)initWithCoder:(NSCoder *)coder
 {
     int i;
-    int version = [coder versionForClassName:@"EnvelopeProfile"];
+    NSInteger version = [coder versionForClassName:@"EnvelopeProfile"];
 	NSMutableDictionary *infoDict;
     NSArray *dictKeys;
 	NSString *key;
 	
-	[self init];
+	if (!(self = [self init])) return nil;
     
     // Encoding/decoding printInfo object does not work correctly for custom
     // paper sizes, so encode/decode it's dictionary instead.
@@ -101,24 +94,24 @@
 		//  For pre 0.6.5 versions, move most prefs from top level of prefs to within the envelope profile(s)
 		NSLog(@"Old version.  Moving top-level prefs to profile prefs.");
 		
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_prefix"]] forKey:@"hide_to_prefix"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_suffix"]] forKey:@"hide_to_suffix"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_prefix"]] forKey:@"hide_from_prefix"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_suffix"]] forKey:@"hide_from_suffix"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_prefix"]] forKey:@"hide_to_prefix"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_suffix"]] forKey:@"hide_to_suffix"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_prefix"]] forKey:@"hide_from_prefix"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_suffix"]] forKey:@"hide_from_suffix"];
 
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_country"]] forKey:@"hide_from_country"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_same_country"]] forKey:@"hide_from_same_country"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_country"]] forKey:@"hide_to_country"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_country"]] forKey:@"hide_from_country"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_same_country"]] forKey:@"hide_from_same_country"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_country"]] forKey:@"hide_to_country"];
 		
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_title"]] forKey:@"hide_from_title"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_name"]] forKey:@"hide_from_name"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_job_title"]] forKey:@"hide_from_job_title"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_company"]] forKey:@"hide_from_company"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_title"]] forKey:@"hide_from_title"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_name"]] forKey:@"hide_from_name"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_job_title"]] forKey:@"hide_from_job_title"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_from_company"]] forKey:@"hide_from_company"];
 		
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_title"]] forKey:@"hide_to_title"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_name"]] forKey:@"hide_to_name"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_job_title"]] forKey:@"hide_to_job_title"];
-		[prefs setValue:[NSNumber numberWithInt:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_company"]] forKey:@"hide_to_company"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_title"]] forKey:@"hide_to_title"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_name"]] forKey:@"hide_to_name"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_job_title"]] forKey:@"hide_to_job_title"];
+		[prefs setValue:[NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:@"hide_to_company"]] forKey:@"hide_to_company"];
 		
 		[prefs setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"from_prefix"] forKey:@"from_prefix"];
 		[prefs setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"from_suffix"] forKey:@"from_suffix"];
@@ -172,7 +165,7 @@
 {
 	EnvelopeProfile *profile = [NSUnarchiver unarchiveObjectWithData:[NSArchiver archivedDataWithRootObject:self]];
 	
-	return [profile retain];
+	return profile;
 }
 
 - (NSPrintInfo *)printInfo
@@ -182,7 +175,7 @@
 
 - (void)setPrintInfo:(NSPrintInfo *)info
 {
-    [printInfo autorelease];
+//    [printInfo autorelease];
 	[[info dictionary] setValue:@"nil" forKey:NSPrintJobDisposition];
     printInfo = [info copy];
 }
@@ -310,14 +303,13 @@
 - (NSMutableDictionary *)prefs
 {
 	if ( ! prefs )
-		[self setPrefs:[[[NSMutableDictionary alloc] init] autorelease]];
+		[self setPrefs:[[NSMutableDictionary alloc] init]];
 
 	return prefs;
 }
 
 - (void)setPrefs:(NSMutableDictionary *)aDict
 {
-	[prefs autorelease];
 	prefs = [aDict mutableCopy];
 }
 

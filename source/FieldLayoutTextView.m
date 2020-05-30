@@ -30,7 +30,7 @@
 {
 	NSAttributedString *theString;
 	NSRange propFirstEffectiveRange, propLastEffectiveRange;
-	int propFirst, propLast, newFirst, newLast;
+	NSInteger propFirst, propLast, newFirst, newLast;
 	
 	proposedRange = [super selectionRangeForProposedRange:proposedRange granularity:granularity];
 	

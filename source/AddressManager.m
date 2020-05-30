@@ -28,12 +28,6 @@
 
 static AddressManager *sharedAddressManager = nil;
 
-- (void)dealloc
-{
-    [sharedAddressManager release];
-	
-    [super dealloc];
-}
 
 + (AddressManager *)sharedAddressManager
 {
@@ -48,8 +42,8 @@ static AddressManager *sharedAddressManager = nil;
 + (NSArray *)personSortDescriptors
 {
 	return [NSArray arrayWithObjects:
-		[[[NSSortDescriptor alloc] initWithKey:kABLastNameProperty ascending:YES] autorelease],
-		[[[NSSortDescriptor alloc] initWithKey:kABFirstNameProperty ascending:YES] autorelease],
+		[[NSSortDescriptor alloc] initWithKey:kABLastNameProperty ascending:YES],
+		[[NSSortDescriptor alloc] initWithKey:kABFirstNameProperty ascending:YES],
 		nil];
 }
 
@@ -95,7 +89,7 @@ static AddressManager *sharedAddressManager = nil;
 
 - (NSString *)linearAddress:(NSDictionary *)addrDict;
 {
-	NSMutableString *addrString = [[@"" mutableCopy] autorelease];
+	NSMutableString *addrString = [@"" mutableCopy];
 	
 	if ( [addrDict valueForKey:@"sequence"] && [addrDict valueForKey:@"label"] )
 	{
@@ -116,19 +110,19 @@ static AddressManager *sharedAddressManager = nil;
 	
 	[addrString replaceOccurrencesOfString:@"\n" withString:@", " options:NSLiteralSearch range:NSMakeRange(0, [addrString length])];
 		
-	return [[addrString copy] autorelease];
+	return [addrString copy];
 }
 
 - (NSAttributedString *)addressStringForAddressDict:(NSDictionary *)addrDict
 {
 	int i;
-	NSMutableAttributedString *addrString = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+	NSMutableAttributedString *addrString = [[NSMutableAttributedString alloc] initWithString:@""];
 	
 	if ( [addrDict objectForKey:@"AddressPrefix"] )
 	{			
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:@"AddressPrefix"]
-											 attributes:[NSDictionary dictionaryWithObject:@"AddressPrefix" forKey:@"AddressPrefix"]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:@"AddressPrefix"]
+											 attributes:[NSDictionary dictionaryWithObject:@"AddressPrefix" forKey:@"AddressPrefix"]]
 			];
 	}
 	
@@ -136,8 +130,8 @@ static AddressManager *sharedAddressManager = nil;
 	{
 		[addrString appendString:@"\n"];
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABTitleProperty]
-											 attributes:[NSDictionary dictionaryWithObject:kABTitleProperty forKey:kABTitleProperty]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABTitleProperty]
+											 attributes:[NSDictionary dictionaryWithObject:kABTitleProperty forKey:kABTitleProperty]]
 			];
 	}
 	
@@ -151,8 +145,8 @@ static AddressManager *sharedAddressManager = nil;
 			}
 			
 			[addrString appendAttributedString:
-				[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABLastNameProperty]
-												 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]] autorelease]
+				[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABLastNameProperty]
+												 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]]
 				];
 		}
 	}
@@ -166,8 +160,8 @@ static AddressManager *sharedAddressManager = nil;
 			}
 			
 			[addrString appendAttributedString:
-				[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABFirstNameProperty]
-												 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]] autorelease]
+				[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABFirstNameProperty]
+												 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]]
 				];
 		}
 	}
@@ -181,8 +175,8 @@ static AddressManager *sharedAddressManager = nil;
 		}
 		
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABMiddleNameProperty]
-											 attributes:[NSDictionary dictionaryWithObject:kABMiddleNameProperty forKey:kABMiddleNameProperty]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABMiddleNameProperty]
+											 attributes:[NSDictionary dictionaryWithObject:kABMiddleNameProperty forKey:kABMiddleNameProperty]]
 			];
 	}
 	
@@ -198,8 +192,8 @@ static AddressManager *sharedAddressManager = nil;
 			}
 			
 			[addrString appendAttributedString:
-				[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABFirstNameProperty]
-												 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]] autorelease]
+				[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABFirstNameProperty]
+												 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]]
 				];
 		}
 	}
@@ -215,8 +209,8 @@ static AddressManager *sharedAddressManager = nil;
 			}
 			
 			[addrString appendAttributedString:
-				[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABLastNameProperty]
-												 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]] autorelease]
+				[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABLastNameProperty]
+												 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]]
 				];
 		}
 	}
@@ -231,8 +225,8 @@ static AddressManager *sharedAddressManager = nil;
 		}
 		
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABSuffixProperty]
-											 attributes:[NSDictionary dictionaryWithObject:kABSuffixProperty forKey:kABSuffixProperty]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABSuffixProperty]
+											 attributes:[NSDictionary dictionaryWithObject:kABSuffixProperty forKey:kABSuffixProperty]]
 			];
 	}
 	
@@ -240,8 +234,8 @@ static AddressManager *sharedAddressManager = nil;
 	{
 		[addrString appendString:@"\n"];
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABJobTitleProperty]
-											 attributes:[NSDictionary dictionaryWithObject:kABJobTitleProperty forKey:kABJobTitleProperty]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABJobTitleProperty]
+											 attributes:[NSDictionary dictionaryWithObject:kABJobTitleProperty forKey:kABJobTitleProperty]]
 			];
 	}
 	
@@ -249,8 +243,8 @@ static AddressManager *sharedAddressManager = nil;
 	{
 		[addrString appendString:@"\n"];
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABOrganizationProperty]
-											 attributes:[NSDictionary dictionaryWithObject:kABOrganizationProperty forKey:kABOrganizationProperty]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:kABOrganizationProperty]
+											 attributes:[NSDictionary dictionaryWithObject:kABOrganizationProperty forKey:kABOrganizationProperty]]
 			];
 	}
 	
@@ -263,8 +257,8 @@ static AddressManager *sharedAddressManager = nil;
 	{
 		[addrString appendString:@"\n"];
 		[addrString appendAttributedString:
-			[[[NSAttributedString alloc] initWithString:[addrDict objectForKey:@"AddressSuffix"]
-											 attributes:[NSDictionary dictionaryWithObject:@"AddressSuffix" forKey:@"AddressSuffix"]] autorelease]
+			[[NSAttributedString alloc] initWithString:[addrDict objectForKey:@"AddressSuffix"]
+											 attributes:[NSDictionary dictionaryWithObject:@"AddressSuffix" forKey:@"AddressSuffix"]]
 			];
 	}
 	
@@ -294,13 +288,13 @@ static AddressManager *sharedAddressManager = nil;
 		[addrString deleteCharactersInRange:NSMakeRange([addrString length]-1, 1)];
 	}
 	
-	return [[addrString copy] autorelease];
+	return [addrString copy];
 }
 
 - (NSDictionary *)addressDictForPerson:(ABPerson *)pers sequence:(NSNumber *)sequence label:(NSString *)label address:(NSDictionary *)addr prefix:(NSString *)prefix suffix:(NSString *)suffix swapNames:(BOOL)swap
 {
 	int i;
-	NSMutableDictionary *personAddress = [[addr mutableCopy] autorelease];
+	NSMutableDictionary *personAddress = [addr mutableCopy];
 	NSArray *addrKeys = [personAddress allKeys];
 	
 	//  Remove any non-string objects from the dictionary (one user has been shown to get an NSNull object for an empty country???)
@@ -336,7 +330,7 @@ static AddressManager *sharedAddressManager = nil;
 	
 	[personAddress setValue:[NSNumber numberWithBool:swap] forKey:@"swapNames"];
 	
-	return [[personAddress copy] autorelease];
+	return [personAddress copy];
 }
 
 /*
@@ -354,53 +348,53 @@ static AddressManager *sharedAddressManager = nil;
 
 - (NSAttributedString *)defaultAddressAttributesString
 {
-	NSMutableAttributedString *attrString = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+	NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@""];
 	
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:[[NSBundle mainBundle] localizedStringForKey:@"AddressPrefix"
+		[[NSAttributedString alloc] initWithString:[[NSBundle mainBundle] localizedStringForKey:@"AddressPrefix"
 																						   value:@"Address Prefix"
 																						   table:@"Localizable"]
-										 attributes:[NSDictionary dictionaryWithObject:@"AddressPrefix" forKey:@"AddressPrefix"]] autorelease]
+										 attributes:[NSDictionary dictionaryWithObject:@"AddressPrefix" forKey:@"AddressPrefix"]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 	
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABTitleProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABTitleProperty forKey:kABTitleProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABTitleProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABTitleProperty forKey:kABTitleProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@" "] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABFirstNameProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABFirstNameProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABFirstNameProperty forKey:kABFirstNameProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@" "] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABMiddleNameProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABMiddleNameProperty forKey:kABMiddleNameProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABMiddleNameProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABMiddleNameProperty forKey:kABMiddleNameProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@" "] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABLastNameProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABLastNameProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABLastNameProperty forKey:kABLastNameProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@" "] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABSuffixProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABSuffixProperty forKey:kABSuffixProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABSuffixProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABSuffixProperty forKey:kABSuffixProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 	
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABJobTitleProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABJobTitleProperty forKey:kABJobTitleProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABJobTitleProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABJobTitleProperty forKey:kABJobTitleProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 	
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABOrganizationProperty)
-										 attributes:[NSDictionary dictionaryWithObject:kABOrganizationProperty forKey:kABOrganizationProperty]] autorelease]
+		[[NSAttributedString alloc] initWithString:ABLocalizedPropertyOrLabel(kABOrganizationProperty)
+										 attributes:[NSDictionary dictionaryWithObject:kABOrganizationProperty forKey:kABOrganizationProperty]]
 		];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 	
 	[attrString appendAttributedString:[[ABAddressBook sharedAddressBook] formattedAddressFromDictionary:
 		[NSDictionary dictionaryWithObjectsAndKeys:
@@ -413,16 +407,16 @@ static AddressManager *sharedAddressManager = nil;
 			nil
 			]
 		]];
-	[attrString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease]];
+	[attrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 	
 	[attrString appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:[[NSBundle mainBundle] localizedStringForKey:@"AddressSuffix"
+		[[NSAttributedString alloc] initWithString:[[NSBundle mainBundle] localizedStringForKey:@"AddressSuffix"
 																						   value:@"Address Suffix"
 																						   table:@"Localizable"]
-										 attributes:[NSDictionary dictionaryWithObject:@"AddressSuffix" forKey:@"AddressSuffix"]] autorelease]
+										 attributes:[NSDictionary dictionaryWithObject:@"AddressSuffix" forKey:@"AddressSuffix"]]
 		];
 	
-	return [[attrString copy] autorelease];
+	return [attrString copy];
 }
 
 @end

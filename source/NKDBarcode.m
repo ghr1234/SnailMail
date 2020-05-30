@@ -56,7 +56,6 @@
     {
         if (!inContent)
         {
-            [self release];
             return nil;
         }
         [self setContent:inContent];
@@ -85,8 +84,7 @@
 -(void)setContent:(NSString *)inContent
 // -----------------------------------------------------------------------------------
 {
-    [content autorelease];
-    content = [inContent retain];
+    content = inContent;
 }
 // -----------------------------------------------------------------------------------
 -(void)setHeight:(float)inHeight
@@ -177,9 +175,11 @@
 // -----------------------------------------------------------------------------------
 {
     int			i;
-    char		*contentString;
+    const char		*contentString;
+    
+    contentString = [self.content UTF8String];
 
-    contentString = (char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    contentString = (__bridge char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 
     for (i = 0; i < strlen(contentString); i++)
         if ([[self _encodeChar:contentString[i]] isEqual:@""])
@@ -212,9 +212,10 @@
 {
     NSMutableString 	*theReturn = [NSMutableString stringWithString:@""];
     int			i;
-    char		*contentString;
+    const char		*contentString;
 
-    contentString = (char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    contentString = (__bridge char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    contentString = [self.content UTF8String];
 
     for (i = 0; i < strlen(contentString); i++)
         [theReturn appendString:[self _encodeChar:contentString[i]]];
@@ -397,10 +398,4 @@
 
 }
 // -----------------------------------------------------------------------------------
--(void)dealloc
-// -----------------------------------------------------------------------------------
-{
-    [content release];
-    [super dealloc];
-}
 @end

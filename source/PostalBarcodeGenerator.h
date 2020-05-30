@@ -31,8 +31,8 @@
 
 }
 
-+ (NKDBarcode *)barcodeOfType:(int)type forContent:(NSString *)content;
-+ (NKDBarcode *)barcodeOfType:(int)type forAddress:(NSDictionary *)addr;
-+ (NKDBarcode *)barcodeOfType:(int)type forAddrString:(NSString *)addr;
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forContent:(NSString *)content;
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forAddress:(NSDictionary *)addr;
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forAddrString:(NSString *)addr;
 
 @end

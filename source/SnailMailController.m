@@ -33,7 +33,7 @@
 
 - (id)init
 {
-	[super init];
+	if (!(self = [super init])) return nil;
 	
 	addressDB = [ABAddressBook sharedAddressBook];
 	
@@ -84,14 +84,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[fromAddresses release];
-    [toAddress release];
-    [fromAddress release];
-	
-    [super dealloc];
-}
 
 - (void)awakeFromNib
 {
@@ -103,7 +95,7 @@
 
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES];
-    [controlWindow setToolbar:[toolbar autorelease]];
+    [controlWindow setToolbar:toolbar];
 	
 	//  Configure AB Plug-In menu item according to whether plug-in is installed or not
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:USER_PLUGIN]
@@ -142,10 +134,10 @@
 	
 	//  Place the backgroundView in the background (doesn't seem to work from IB)
 	
-	[[backgroundView enclosingScrollView] retain];
+	[backgroundView enclosingScrollView];
 	[[backgroundView enclosingScrollView] removeFromSuperview];
 	[printableView addSubview:[backgroundView enclosingScrollView] positioned:NSWindowBelow relativeTo:toView];
-	[[backgroundView enclosingScrollView] release];
+	[backgroundView enclosingScrollView];
 	
 	//  Make the addressViews' backgrounds invisible so backgroundView is visible through them
 	//  and backgrounView invisible so it doesn't hide other views when edited
@@ -291,7 +283,6 @@
 
 - (void)setCePrefs:(NSDictionary *)aDict
 {
-	[cePrefs autorelease];
 	cePrefs = [aDict mutableCopy];
 }
 
@@ -334,8 +325,7 @@
 
 - (void)setFromAddress:(NSDictionary *)addr
 {
-    [fromAddress autorelease];
-    fromAddress = [addr retain];
+    fromAddress = addr;
 }
 
 - (NSDictionary *)toAddress
@@ -345,7 +335,7 @@
 
 - (void)setToAddress:(NSDictionary *)addr forPerson:(ABPerson *)pers
 {
-    [toAddress autorelease];
+//    [toAddress autorelease];
 	
 	if ( ! addr )
 	{	
@@ -353,14 +343,14 @@
 	}
 	else
 	{
-		toAddress = [[[AddressManager sharedAddressManager] addressDictForPerson:pers
+		toAddress = [[AddressManager sharedAddressManager] addressDictForPerson:pers
 																		sequence:nil
 																		   label:nil
 																		 address:addr
 																		  prefix:[self toPrefix]
 																		  suffix:[self toSuffix]
 																	   swapNames:[[cePrefs objectForKey:@"to_swap_names"] intValue]
-			] retain];
+			];
 	}
 }
 
@@ -371,8 +361,7 @@
 
 - (void)setBarcodeView:(NKDBarcodeOffscreenView *)view
 {
-    [barcodeView autorelease];
-    barcodeView = [view retain];
+    barcodeView = view;
 }
 
 
@@ -383,8 +372,7 @@
 
 - (void)setBarcode:(NKDBarcode *)aBarcode
 {
-    [barcode autorelease];
-    barcode = [aBarcode retain];
+    barcode = aBarcode;
 }
 
 - (NSArray *)fromAddresses
@@ -394,14 +382,12 @@
 
 - (void)setFromAddresses: (NSArray *)addressList
 {
-    [fromAddresses autorelease];
-    fromAddresses = [addressList retain];
+    fromAddresses = [NSMutableArray arrayWithArray:addressList];
 }
 
 - (void)setEnvelopeProfiles:(NSMutableDictionary *)profileList
 {
-    [envelopeProfiles autorelease];
-    envelopeProfiles = [profileList retain];
+    envelopeProfiles = profileList;
 }
 
 - (NSMutableDictionary *)envelopeProfiles
@@ -413,8 +399,7 @@
 {
 	[currentEnvelopeProfile setPrefs:cePrefs];
 
-    [currentEnvelopeProfile autorelease];
-    currentEnvelopeProfile = [aProfile retain];
+    currentEnvelopeProfile = aProfile;
 	
 	[self setCePrefs:[currentEnvelopeProfile prefs]];
 }
@@ -426,8 +411,7 @@
 
 - (void)setProfileNames:(NSMutableArray *)names
 {
-    [profileNames autorelease];
-    profileNames = [names retain];
+    profileNames = names;
 }
 
 - (NSMutableArray *)profileNames
@@ -437,8 +421,7 @@
 
 - (void)setNewProfiles:(NSMutableDictionary *)profileList
 {
-    [newProfiles autorelease];
-    newProfiles = [profileList retain];
+    newProfiles = profileList;
 }
 
 - (NSMutableDictionary *)newProfiles
@@ -451,8 +434,8 @@
 - (void)populateEnvelopeProfilePopup
 {
     int i;
-    NSMenuItem *editProfilesItem = [[envelopeProfilePopup itemAtIndex:
-		([envelopeProfilePopup numberOfItems] -1)] retain];
+    NSMenuItem *editProfilesItem = [envelopeProfilePopup itemAtIndex:
+		([envelopeProfilePopup numberOfItems] -1)];
 	
     [envelopeProfilePopup removeAllItems];
 	
@@ -464,7 +447,6 @@
     [envelopeProfilePopup addItemWithTitle:[editProfilesItem title]];
     [[envelopeProfilePopup lastItem] setTarget:[editProfilesItem target]];
     [[envelopeProfilePopup lastItem] setAction:[editProfilesItem action]];
-    [editProfilesItem release];
 	
     [envelopeProfilePopup selectItemWithTitle:[[envelopeProfiles allKeysForObject:currentEnvelopeProfile] objectAtIndex:0]];
 }
@@ -510,7 +492,7 @@
     int hideJobTitle;
     int hideCompany = 0;
 	BOOL hideCountry = NO;
-	NSMutableDictionary *personAddress = [[addr mutableCopy] autorelease];
+	NSMutableDictionary *personAddress = [addr mutableCopy];
 	
 	if ( [toFrom isEqualToString:@"FROM"] )
     {
@@ -602,7 +584,7 @@
 	if ( hideCountry )
 		[personAddress setObject:@"" forKey:kABAddressCountryKey];
 	
-	return [[personAddress copy] autorelease];
+	return [personAddress copy];
 }
 
 - (BOOL)sameToFromCountries
@@ -663,7 +645,7 @@
 	{
 		if ( [[fromView enclosingScrollView] superview] )
 		{
-			[[fromView enclosingScrollView] retain];
+			[fromView enclosingScrollView];
 			[[fromView enclosingScrollView] removeFromSuperview];
 		}
 	}
@@ -671,11 +653,11 @@
 	{
 		if ( [[fromView enclosingScrollView] superview] != printableView )
 		{
-			[printableView addSubview:[[fromView enclosingScrollView] autorelease]];
+			[printableView addSubview:[fromView enclosingScrollView]];
 		}
 	}
 	
-	[cePrefs setValue:[NSNumber numberWithInt:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
+	[cePrefs setValue:[NSNumber numberWithInteger:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
 }
 
 - (void)selectFromAddress
@@ -700,7 +682,7 @@
 		[fromView setAttributedString:[fromFormatted addMatchingAttributesFromString:[self fromAttributes]]];
     }
 	
-	[cePrefs setValue:[NSNumber numberWithInt:[fromPopup indexOfSelectedItem]] forKey:@"from_address_menu_index"];
+	[cePrefs setValue:[NSNumber numberWithInteger:[fromPopup indexOfSelectedItem]] forKey:@"from_address_menu_index"];
 
 	//  Make sure any overlapped views (eg, barcode view, to view) are also redisplayed
 	[printableView display];
@@ -774,7 +756,7 @@
     }
 }
 
-- (void)positionBarcodeViewForType:(int)type
+- (void)positionBarcodeViewForType:(NSInteger)type
 {
     NSRect frame;
 	
@@ -792,7 +774,7 @@
 
 - (void)printEnvelopesToPersonalisedAddresses:(NSArray *)personalisedAddressList
 {
-    int i;
+    NSInteger i;
 	NSAttributedString *formattedAddress;
     NSDictionary *personalisedAddress;
     NSView *multiPrintView = [[NSView alloc] init];
@@ -802,7 +784,7 @@
     NSSize paperSize = [[currentEnvelopeProfile printInfo] paperSize];
     float paperWidth = paperSize.width - ([[currentEnvelopeProfile printInfo] leftMargin] + [[currentEnvelopeProfile printInfo] rightMargin]);
     float paperHeight = paperSize.height - ([[currentEnvelopeProfile printInfo] topMargin] + [[currentEnvelopeProfile printInfo] bottomMargin]);
-    int addrCount = [personalisedAddressList count];
+    NSInteger addrCount = [personalisedAddressList count];
 	NSPrintInfo *printInfo = [NSPrintInfo sharedPrintInfo];
 	
 	if ( [currentEnvelopeProfile printInfo] )
@@ -892,7 +874,6 @@
 	[printOp runOperation];
 	[currentEnvelopeProfile setPrintInfo:[printOp printInfo]];
     
-	[multiPrintView release];
 }
 
 - (void)refreshFromAddresses
@@ -955,9 +936,9 @@
 - (NSArray *)personalisedFromAddresses
 {
     ABMultiValue *addrList;
-	NSMutableArray *personAddresses = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *personAddresses = [[NSMutableArray alloc] init];
     NSArray *people;
-    int i, j;
+    NSInteger i, j;
 	
     if ( [[cePrefs valueForKey:@"fromGroupIndex"] intValue] == 0 )
     {
@@ -989,7 +970,7 @@
 		{
 			[personAddresses addObject:
 				[[AddressManager sharedAddressManager] addressDictForPerson:[people objectAtIndex:i]
-																   sequence:[NSNumber numberWithInt:j]
+																   sequence:[NSNumber numberWithInteger:j]
 																	  label:[addrList labelAtIndex:j]
 																	address:[addrList valueAtIndex:j]
 																	 prefix:[self fromPrefix]
@@ -999,7 +980,7 @@
 		}
 	}
 	
-    return [[personAddresses copy] autorelease];
+    return [personAddresses copy];
 }
 
 - (void)changeNewProfilesItem:(int)index toName:(NSString *)name
@@ -1119,7 +1100,7 @@
     else
     {
 		[cePrefs setObject:[NSArchiver archivedDataWithRootObject:[fromView attributedString]] forKey:@"from_address_content"];
-		[cePrefs setValue:[NSNumber numberWithInt:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
+		[cePrefs setValue:[NSNumber numberWithInteger:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
 
 		[self setCurrentEnvelopeProfile:[envelopeProfiles objectForKey:[envelopeProfilePopup titleOfSelectedItem]]];
 
@@ -1146,7 +1127,7 @@
 
 - (void)invokeEnvelopeProfilesWindow
 {
-    int sessionResult;
+    NSInteger sessionResult;
     NSModalSession profilesSession;
 	
     [self setNewProfiles:[envelopeProfiles mutableCopy]];
@@ -1606,7 +1587,7 @@
 
 - (IBAction)marginsDefault:(id)sender
 {
-    EnvelopeProfile *defaultProfile = [[[EnvelopeProfile alloc] init] autorelease];
+    EnvelopeProfile *defaultProfile = [[EnvelopeProfile alloc] init];
 	
     [marginsWindow endEditingFor:nil];
 	
@@ -1745,28 +1726,28 @@
         return;
     }
 	
-    [cePrefs setObject:[NSNumber numberWithInt:[toSwapNamesSwitch state]] forKey:@"to_swap_names"];
-    [cePrefs setObject:[NSNumber numberWithInt:[fromSwapNamesSwitch state]] forKey:@"from_swap_names"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[toSwapNamesSwitch state]] forKey:@"to_swap_names"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[fromSwapNamesSwitch state]] forKey:@"from_swap_names"];
 	
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToPrefixSwitch state]] forKey:@"hide_to_prefix"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToSuffixSwitch state]] forKey:@"hide_to_suffix"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromPrefixSwitch state]] forKey:@"hide_from_prefix"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromSuffixSwitch state]] forKey:@"hide_from_suffix"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToPrefixSwitch state]] forKey:@"hide_to_prefix"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToSuffixSwitch state]] forKey:@"hide_to_suffix"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromPrefixSwitch state]] forKey:@"hide_from_prefix"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromSuffixSwitch state]] forKey:@"hide_from_suffix"];
 	
-	[cePrefs setObject:[NSNumber numberWithInt:[hideFromCountrySwitch state]] forKey:@"hide_from_country"];
-	[cePrefs setObject:[NSNumber numberWithInt:[hideFromSameCountrySwitch state]] forKey:@"hide_from_same_country"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToCountrySwitch state]] forKey:@"hide_to_country"];
-	[cePrefs setObject:[NSNumber numberWithInt:[hideToSameCountrySwitch state]] forKey:@"hide_to_same_country"];
+	[cePrefs setObject:[NSNumber numberWithInteger:[hideFromCountrySwitch state]] forKey:@"hide_from_country"];
+	[cePrefs setObject:[NSNumber numberWithInteger:[hideFromSameCountrySwitch state]] forKey:@"hide_from_same_country"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToCountrySwitch state]] forKey:@"hide_to_country"];
+	[cePrefs setObject:[NSNumber numberWithInteger:[hideToSameCountrySwitch state]] forKey:@"hide_to_same_country"];
 	
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromTitleSwitch state]] forKey:@"hide_from_title"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromNameSwitch state]] forKey:@"hide_from_name"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromJobSwitch state]] forKey:@"hide_from_job_title"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideFromCompanySwitch state]] forKey:@"hide_from_company"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromTitleSwitch state]] forKey:@"hide_from_title"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromNameSwitch state]] forKey:@"hide_from_name"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromJobSwitch state]] forKey:@"hide_from_job_title"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideFromCompanySwitch state]] forKey:@"hide_from_company"];
 	
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToTitleSwitch state]] forKey:@"hide_to_title"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToNameSwitch state]] forKey:@"hide_to_name"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToJobSwitch state]] forKey:@"hide_to_job_title"];
-    [cePrefs setObject:[NSNumber numberWithInt:[hideToCompanySwitch state]] forKey:@"hide_to_company"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToTitleSwitch state]] forKey:@"hide_to_title"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToNameSwitch state]] forKey:@"hide_to_name"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToJobSwitch state]] forKey:@"hide_to_job_title"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[hideToCompanySwitch state]] forKey:@"hide_to_company"];
 	
     [cePrefs setObject:[fromPrefixField stringValue] forKey:@"from_prefix"];
     [cePrefs setObject:[fromSuffixField stringValue] forKey:@"from_suffix"];
@@ -1774,10 +1755,10 @@
     [cePrefs setObject:[toSuffixField stringValue] forKey:@"to_suffix"];
 	
     [cePrefs setObject:[fromGroupPopup titleOfSelectedItem] forKey:@"fromGroup"];
-    [cePrefs setObject:[NSNumber numberWithInt:[fromGroupPopup indexOfSelectedItem]] forKey:@"fromGroupIndex"];
+    [cePrefs setObject:[NSNumber numberWithInteger:[fromGroupPopup indexOfSelectedItem]] forKey:@"fromGroupIndex"];
     [cePrefs setObject:[barcodePopup titleOfSelectedItem] forKey:@"barcodeType"];
 	
-	[cePrefs setValue:[NSNumber numberWithInt:[barcodePositionSwitch state]] forKey:@"barcode_position"];
+	[cePrefs setValue:[NSNumber numberWithInteger:[barcodePositionSwitch state]] forKey:@"barcode_position"];
 	
 	[cePrefs setObject:[[[localCountryNamesView string] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsSeparatedByString:@"\n"]
 			  forKey:@"local_country_names"];
@@ -1963,7 +1944,7 @@
 	NSArray *selectedIdentifiers;
 	int i, j;
 	BOOL foundMatchingLabel;
-	NSMutableArray *selectedAddrs = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *selectedAddrs = [[NSMutableArray alloc] init];
 	NSString *restrictByLabelCaps = [[cePrefs valueForKey:@"labelToRestrictBy"] capitalizedString];
 	BOOL overrideRestrictForNoMatch = [[cePrefs valueForKey:@"overrideRestrictForNoMatch"] boolValue];
 
@@ -2171,7 +2152,7 @@
         [item setAction:@selector(invokeTextAttributesWindow:)];
     }
 	
-    return [item autorelease];
+    return item;
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
@@ -2194,7 +2175,7 @@
 
 #pragma mark Table Data Source
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     if ( aTableView == envelopeProfilesTable )
     {
@@ -2375,7 +2356,7 @@ objectValueForTableColumn:(NSTableColumn *)aColumn row:(int)aRowIndex
     [[NSUserDefaults standardUserDefaults] setInteger:envFrame.origin.x
                forKey:@"envelope_left"];
     
-    [cePrefs setValue:[NSNumber numberWithInt:[fromPopup indexOfSelectedItem]] forKey:@"from_address_menu_index"];
+    [cePrefs setValue:[NSNumber numberWithInteger:[fromPopup indexOfSelectedItem]] forKey:@"from_address_menu_index"];
 	
     if ( toAddress && [[peoplePicker selectedRecords] count] > 0 )
 	{
@@ -2396,7 +2377,7 @@ objectValueForTableColumn:(NSTableColumn *)aColumn row:(int)aRowIndex
     else
         [[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:[self barcode]] forKey:@"barcode"];
 	
-    [cePrefs setValue:[NSNumber numberWithInt:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
+    [cePrefs setValue:[NSNumber numberWithInteger:[fromTypePopup indexOfSelectedItem]] forKey:@"from_type"];
 	
 	[currentEnvelopeProfile setPrefs:cePrefs];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:envelopeProfiles] forKey:@"envelope_profiles"];

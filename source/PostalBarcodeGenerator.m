@@ -26,7 +26,7 @@
 
 @implementation PostalBarcodeGenerator
 
-+ (NKDBarcode *)barcodeOfType:(int)type forContent:(NSString *)content;
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forContent:(NSString *)content;
 {
     NKDBarcode 	*barcode;
 
@@ -51,7 +51,7 @@
     }
 }
 
-+ (NKDBarcode *)barcodeOfType:(int)type forAddress:(NSDictionary *)addr;
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forAddress:(NSDictionary *)addr;
 {
     NSMutableString *content;
 
@@ -63,7 +63,7 @@
                                     options:NSLiteralSearch
                                       range:NSMakeRange(0, [content length])
             ];
-	[content autorelease];
+//	[content autorelease];
 	
         return [PostalBarcodeGenerator barcodeOfType:type forContent:content];
     }
@@ -73,7 +73,7 @@
     }
 }
 
-+ (NKDBarcode *)barcodeOfType:(int)type forAddrString:(NSString *)addr
++ (NKDBarcode *)barcodeOfType:(NSInteger)type forAddrString:(NSString *)addr
 {
     NSArray *lines = [addr componentsSeparatedByString:@"\n"];
     NSRange digitRange;
@@ -122,7 +122,7 @@
                                     options:NSLiteralSearch
                                       range:NSMakeRange(0, [content length])
             ];
-	[content autorelease];
+//	[content autorelease];
 
         return [PostalBarcodeGenerator barcodeOfType:type forContent:content];
     }

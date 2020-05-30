@@ -37,7 +37,7 @@
 	if ( ! attributesString )
 		return self;
 	
-	theString = [[self mutableCopy] autorelease];
+	theString = [self mutableCopy];
 	
 	for ( i = 0; i < [self length]; i += attrRange.length )
 	{
@@ -56,7 +56,7 @@
 		}
 	}
 	
-	return [[theString copy] autorelease];
+	return [theString copy];
 }
 
 - (NSAttributedString *)reattributedWhitespaceString
@@ -64,7 +64,7 @@
 	int i;
 	NSAttributedString *attrChar;
 	int length = [self length];
-	NSMutableAttributedString *newString = [[self mutableCopy] autorelease];
+	NSMutableAttributedString *newString = [self mutableCopy];
 	
 	if ( length < 2 )
 		return newString;
@@ -83,7 +83,7 @@
 		}
 	}
 
-	return [[newString copy] autorelease];
+	return [newString copy];
 }
 
 @end
@@ -101,7 +101,7 @@
 		attr = [self attributesAtIndex:([self length] - 1) effectiveRange:NULL];
 
 	[self appendAttributedString:
-		[[[NSAttributedString alloc] initWithString:aString attributes:attr] autorelease]
+		[[NSAttributedString alloc] initWithString:aString attributes:attr]
 		];
 }
 

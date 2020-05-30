@@ -35,7 +35,6 @@
     {
         if (!inContent)
         {
-            [self release];
             return nil;
         }
         [self setContent:inContent];
@@ -109,7 +108,8 @@
                 andBar:(int)bar
 // -----------------------------------------------------------------------------------
 {
-    char *	barcode = (char *) [content dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    char *	barcode = (__bridge char *) [content dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    const char *barcode = [content UTF8String];
     char	check;
 
     check = (index >= strlen(barcode)) ? checkDigit : barcode[index];
@@ -226,7 +226,9 @@
 -(void)generateChecksum
 // -----------------------------------------------------------------------------------
 {
-    char *	code = (char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    char *	code = (__bridge char *)[[self content] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    const char *code = [self.content UTF8String];
     int		i, sum=0;
 
     for (i = 0; i < strlen(code); i++)

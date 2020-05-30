@@ -25,7 +25,7 @@
 - (void)performActionForPerson:(ABPerson *)person identifier:(NSString *)identifier
 {
 	ABMultiValue *personAddresses;
-    int index;
+    NSInteger index;
     NSDictionary *address;
 	id smControllerProxy = NULL;
 	NSDate *timeoutDate = [NSDate dateWithTimeIntervalSinceNow:60];

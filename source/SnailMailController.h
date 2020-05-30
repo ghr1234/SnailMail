@@ -93,7 +93,6 @@
 #pragma mark Initialisation and Deallocation
 
 - (id)init;
-- (void)dealloc;
 - (void)awakeFromNib;
 
 #pragma mark Accessor Methods
@@ -133,7 +132,7 @@
 - (void)selectFromAddress;
 - (void)selectToAddressUpdatingFromAddress;
 - (void)addressEnvelope;
-- (void)positionBarcodeViewForType:(int)type;
+- (void)positionBarcodeViewForType:(NSInteger)type;
 - (void)printEnvelopesToPersonalisedAddresses:(NSArray *)personalisedAddressList;
 
 - (void)refreshFromAddresses;

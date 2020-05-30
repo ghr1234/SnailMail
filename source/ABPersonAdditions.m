@@ -53,8 +53,6 @@ THE SOFTWARE.
 	selfString = [selfArray componentsJoinedByString:@", "];
 	otherString = [otherArray componentsJoinedByString:@", "];
 	
-	[selfArray release];
-	[otherArray release];
 	
 	return [selfString compare:otherString];
 }

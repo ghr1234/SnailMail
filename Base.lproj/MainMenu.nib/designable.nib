@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="14F2511" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1060" identifier="macosx"/>
+        <deployment version="101000" identifier="macosx"/>
         <plugIn identifier="com.apple.AddressBook.ibplugin" version="9532"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -17,11 +17,11 @@
         <window title="Snail Mail" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="control_window" animationBehavior="default" id="21" userLabel="Control Window">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="24" y="366" width="550" height="302"/>
+            <rect key="contentRect" x="24" y="366" width="627" height="302"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <value key="minSize" type="size" width="550" height="250"/>
             <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="550" height="302"/>
+                <rect key="frame" x="0.0" y="0.0" width="627" height="302"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" id="269">
@@ -34,7 +34,7 @@
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="266">
-                        <rect key="frame" x="260" y="46" width="273" height="26"/>
+                        <rect key="frame" x="260" y="46" width="350" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="Choose a Return Address" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="297" id="963">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -47,7 +47,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <abPeoplePickerView allowsMultipleSelection="YES" valueSelectionBehavior="multipleValue" id="774">
-                        <rect key="frame" x="0.0" y="78" width="550" height="224"/>
+                        <rect key="frame" x="0.0" y="78" width="627" height="224"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <propertyList>
                             <mutableDictionary>
@@ -115,6 +115,7 @@
                 <outlet property="delegate" destination="285" id="631"/>
                 <outlet property="initialFirstResponder" destination="774" id="889"/>
             </connections>
+            <point key="canvasLocation" x="415.5" y="958"/>
         </window>
         <menu title="Snail Mail" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
@@ -1181,7 +1182,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="894">
-                        <rect key="frame" x="182" y="224" width="141" height="26"/>
+                        <rect key="frame" x="182" y="224" width="204" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="My Card in Address Book" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="895" id="1018">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1190,21 +1191,6 @@ DQ
                                 <items>
                                     <menuItem title="My Card in Address Book" state="on" id="895"/>
                                     <menuItem title="All Addresses" id="892"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                    </popUpButton>
-                    <popUpButton verticalHuggingPriority="750" id="896">
-                        <rect key="frame" x="111" y="192" width="212" height="26"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="(None)" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="900" id="1019">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" title="OtherViews" id="898">
-                                <items>
-                                    <menuItem title="(None)" state="on" id="900"/>
-                                    <menuItem title="Australia Post" id="899"/>
-                                    <menuItem title="USPS PostNet" id="901"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -1333,6 +1319,21 @@ Check your postal service requirements to make sure you position the margin (and
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
+                    <popUpButton verticalHuggingPriority="750" id="896">
+                        <rect key="frame" x="182" y="193" width="204" height="26"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <popUpButtonCell key="cell" type="push" title="(None)" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="900" id="1019">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="898">
+                                <items>
+                                    <menuItem title="(None)" state="on" id="900"/>
+                                    <menuItem title="Australia Post" id="899"/>
+                                    <menuItem title="USPS PostNet" id="901"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
                 </subviews>
             </view>
         </window>
@@ -1358,13 +1359,13 @@ Check your postal service requirements to make sure you position the margin (and
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" id="685">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="298"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="198" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="195" minWidth="10" maxWidth="1000" id="704">
+                                        <tableColumn width="179" minWidth="10" maxWidth="1000" id="704">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

@@ -34,7 +34,7 @@ Nik's other software efforts can be found at <http://nixanz.com/>
 Original Source Copyright &copy; 2011 Nik Sands
 Original NKDBarcode sourcecode &copy; 2002 Jeff LaMarche and Naked Software.
 
-As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under the
+As of Jan 4 2011 all of Snail Mail has been opened, and is distributed under the
 [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
 
@@ -44,7 +44,7 @@ For a current list of issues, or to report a new issue, see the [github issue pa
 
 Open Issues As of Version 1.92:
 
-## Todo List##
+## Todo List ##
 
 Address Book has been replaced by Contacts so all Address Book APIs should be changed, if possible
 
@@ -61,9 +61,13 @@ Address Book has been replaced by Contacts so all Address Book APIs should be ch
 * Removed data-size warnings (replaced int with NSInteger)
 * Replaced deprecated objects and methods
 
+May, 2020
+
 ### 1.9 ###
 
 * Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+
+May, 2020
 
 ###1.8###
 

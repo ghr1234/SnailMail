@@ -59,9 +59,13 @@ Address Book has been replaced by Contacts so all Address Book APIs should be ch
 * Removed data-size warnings (replaced int with NSInteger)
 * Replaced deprecated objects and methods
 
+May, 2020
+
 ### 1.9 ###
 
 * Compiles for 64-bit only. Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+
+May, 2020
 
 ###1.8###
 

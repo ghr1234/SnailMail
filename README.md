@@ -44,7 +44,7 @@ For a current list of issues, or to report a new issue, see the [github issue pa
 
 Open Issues As of Version 1.91:
 
-## Todo List##
+## Todo List ##
 
 Look into removing use of private methods
 

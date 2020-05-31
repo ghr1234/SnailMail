@@ -42,17 +42,19 @@ As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under t
 
 For a current list of issues, or to report a new issue, see the [github issue page](https://github.com/knowuh/SnailMail/issues)
 
-Open Issues As of Version 1.91:
+Open Issues As of Version 1.92:
 
 ## Todo List##
 
-Look into removing use of private methods
-
-Address Book has been replaced by Contacts so all Address Book APIs should be changed, if possible (but see previous point)
+Address Book has been replaced by Contacts so all Address Book APIs should be changed, if possible
 
 ## Change Log ##
 
 =======
+### 1.92 ###
+
+* Removed use of private methods and associated funtionality since the private methods are non-functional in MacOSX 10.10
+
 ### 1.91 ###
 
 * Updated to use ARC
@@ -61,7 +63,7 @@ Address Book has been replaced by Contacts so all Address Book APIs should be ch
 
 ### 1.9 ###
 
-* Compiles for 64-bit only. Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+* Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
 
 ###1.8###
 

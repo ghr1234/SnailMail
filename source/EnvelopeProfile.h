@@ -37,7 +37,6 @@
 
 - (id)init;
 - (id)initWithPrintInfo:(NSPrintInfo *)info;
-- (void)dealloc;
 - (id)initWithCoder:(NSCoder *)coder;
 - (void)encodeWithCoder:(NSCoder *)coder;
 - (id)copyWithZone:(NSZone *)zone;

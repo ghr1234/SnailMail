@@ -42,20 +42,27 @@ As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under t
 
 For a current list of issues, or to report a new issue, see the [github issue page](https://github.com/knowuh/SnailMail/issues)
 
-Open Issues As of Version 1.8:
-
-* Searching only works for begining of names or begining of Town, not for any other fields or for characters elsewhere in names/towns.
-  * The searching is using Apple's API which is not modifiable within the view being used.
-  * A more advanced search algorithm is possible using part of Apple's API, but cannot be done with the search field attached to the address list view (and if done from another search field, results cannot be placed in the Apple API's address list view).
-* Changing selection of "to" address doesn't update envelope when another address for the same person record was previously selected. 
-  * Work around is to select an address for another person then select the address original person.
-  * This is a bug in Apple's Address Book API in Mac OS X 10.3, and is fixed in Mac OS X 10.4 (Tiger).
+Open Issues As of Version 1.91:
 
 ## Todo List##
 
+Look into removing use of private methods
+
+Address Book has been replaced by Contacts so all Address Book APIs should be changed, if possible (but see previous point)
+
 ## Change Log ##
 
-### 1.8 ###
+### 1.91 ###
+
+* Updated to use ARC
+* Removed data-size warnings (replaced int with NSInteger)
+* Replaced deprecated objects and methods
+
+### 1.9 ###
+
+* Compiles for 64-bit only. Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+
+###1.8###
 
 * Records for companies will now match person name as well as company name when searching (as for records for people).
 *  titlebar/toolbar.

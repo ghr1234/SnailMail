@@ -34,7 +34,7 @@ Nik's other software efforts can be found at <http://nixanz.com/>
 Original Source Copyright &copy; 2011 Nik Sands
 Original NKDBarcode sourcecode &copy; 2002 Jeff LaMarche and Naked Software.
 
-As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under the
+As of Jan 4 2011 all of Snail Mail has been opened, and is distributed under the
 [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
 

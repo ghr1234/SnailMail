@@ -1,12 +1,5 @@
-/* 
-  inoPlist.strings
-  Snail Mail
-
-  
-*/
-
 /* Localized versions of Info.plist keys */
 CFBundleName = "Snail Mail";
-CFBundleShortVersionString = "1.9";
-CFBundleGetInfoString = "Snail Mail version 1.9, Copyright 2002-2006 NIXANZ.";
+CFBundleShortVersionString = "1.91";
+CFBundleGetInfoString = "Snail Mail version 1.91, Copyright 2002-2006 NIXANZ.";
 NSHumanReadableCopyright = "Copyright 2002-2006 NIXANZ.";

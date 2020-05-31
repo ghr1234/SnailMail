@@ -63,7 +63,7 @@
 {
 	int i;
 	NSAttributedString *attrChar;
-	int length = [self length];
+	NSInteger length = [self length];
 	NSMutableAttributedString *newString = [self mutableCopy];
 	
 	if ( length < 2 )

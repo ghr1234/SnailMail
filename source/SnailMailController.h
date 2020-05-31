@@ -90,7 +90,7 @@
     NSDictionary *toAddress;
 }
 
-#pragma mark Initialisation and Deallocation
+#pragma mark Initialisation
 
 - (id)init;
 - (void)awakeFromNib;

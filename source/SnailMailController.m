@@ -29,7 +29,11 @@
 
 @implementation SnailMailController
 
-#pragma mark Initialisation and Deallocation
+#pragma mark Initialisation
+
+NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButton);
+
+NSConnection *pluginConnection;
 
 - (id)init
 {
@@ -37,9 +41,10 @@
 	
 	addressDB = [ABAddressBook sharedAddressBook];
 	
-	//  Establish self as a connection server for the AB SnailMailPlugin to communicate with
-	[[NSConnection defaultConnection] setRootObject:self];
-	if ( ! [[NSConnection defaultConnection] registerName:@"com_nixanz_snailmail"] )
+	//  Create a connection server for the AB SnailMailPlugin to communicate with
+    pluginConnection = [NSConnection new];
+	[pluginConnection setRootObject:self];
+	if ( ! [pluginConnection registerName:@"com_nixanz_snailmail"] )
 	{
 		NSLog(@"Failed to register connection name for plugin communication");
 	}
@@ -1181,7 +1186,7 @@
 			[[NSApplication sharedApplication] endModalSession:profilesSession];
 			profilesSession = [[NSApplication sharedApplication] beginModalSessionForWindow:envelopeProfilesWindow];
 		}
-		else if ( sessionResult == NSRunAbortedResponse )
+		else if ( sessionResult == NSModalResponseAbort )
 		{
 			// User clicked "Cancel"
 			[self setProfileNames:[[[envelopeProfiles allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] mutableCopy]];
@@ -1189,7 +1194,7 @@
 			[envelopeProfilePopup selectItemWithTitle:[[envelopeProfiles allKeysForObject:currentEnvelopeProfile] objectAtIndex:0]];
 			break;
 		}
-		else if ( sessionResult == NSRunStoppedResponse )
+		else if ( sessionResult == NSModalResponseAbort )
 		{
 			// User clicked "OK"
 			[envelopeProfilesTable deselectAll:self];
@@ -1228,6 +1233,17 @@
 	[self printEnvelope:self];
 }
 
+NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButton)
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.alertStyle = NSCriticalAlertStyle;
+    alert.messageText     = title;
+    alert.informativeText = msgFormat;
+    
+    [alert runModal];
+    return 0;
+}
+
 - (BOOL)applyMarginsChange
 {
     NSSize paperSize = [[currentEnvelopeProfile printInfo] paperSize];
@@ -1235,69 +1251,60 @@
     if ( ( [marginFromLeftField intValue] + [marginFromRightField intValue] )
 		 >= paperSize.width )
     {
-        NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
-															   value:@"Invalid Margins"
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"FromLeftRightBad"
-															   value:@"The Return Address left and right margins exceed the current paper width."
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-															   value:@"Cancel"
-															   table:@"Localizable"],
-                        NULL,
-                        NULL
+        showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
+                                                           value:@"Invalid Margins"
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"FromLeftRightBad"
+                                                           value:@"The Return Address left and right margins exceed the current paper width."
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
+                                                           value:@"Cancel"
+                                                           table:@"Localizable"]
+
                         );
 		return NO;
     }
     else if ( ( [marginFromTopField intValue] + [marginFromBottomField intValue] )
               >= paperSize.height )
     {
-        NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
+        showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
 															   value:@"Invalid Margins"
 															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"FromTopBottomBad"
-															   value:@"The Return Address top and bottom margins exceed the current paper height."
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-															   value:@"Cancel"
-															   table:@"Localizable"],
-                        NULL,
-                        NULL
-                        );
+                    [[NSBundle mainBundle] localizedStringForKey:@"FromTopBottomBad"
+                                                           value:@"The Return Address top and bottom margins exceed the current paper height."
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
+                                                           value:@"Cancel"
+                                                           table:@"Localizable"]                        );
 		return NO;
     }
     else if ( ( [marginToLeftField intValue] + [marginToRightField intValue] )
               >= paperSize.width )
     {
-        NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
-															   value:@"Invalid Margins"
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"ToLeftRightBad"
-															   value:@"The Addressee left and right margins exceed the current paper width."
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-															   value:@"Cancel"
-															   table:@"Localizable"],
-                        NULL,
-                        NULL
+        showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
+                                                           value:@"Invalid Margins"
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"ToLeftRightBad"
+                                                           value:@"The Addressee left and right margins exceed the current paper width."
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
+                                                           value:@"Cancel"
+                                                           table:@"Localizable"]
                         );
 		return NO;
     }
     else if ( ( [marginToTopField intValue] + [marginToBottomField intValue] )
               >= paperSize.height )
     {
-        NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
-															   value:@"Invalid Margins"
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"ToTopBottomBad"
-															   value:@"The Addressee top and bottom margins exceed the current paper height."
-															   table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-															   value:@"Cancel"
-															   table:@"Localizable"],
-                        NULL,
-                        NULL
-                        );
+        showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"InvalidMargins"
+                                                           value:@"Invalid Margins"
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"ToTopBottomBad"
+                                                           value:@"The Addressee top and bottom margins exceed the current paper height."
+                                                           table:@"Localizable"],
+                    [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
+                                                           value:@"Cancel"
+                                                           table:@"Localizable"]                        );
 		return NO;
     }
     else
@@ -1365,28 +1372,28 @@
 
 - (IBAction)installAddressBookPlugin:(id)sender
 {
-	if ( ! [[NSFileManager defaultManager] copyPath:SOURCE_PLUGIN
-											 toPath:GLOBAL_PLUGIN
-											handler:nil] )
+    NSError *error;
+	if ( ! [[NSFileManager defaultManager] copyItemAtPath:SOURCE_PLUGIN
+                                                   toPath:GLOBAL_PLUGIN
+                                                    error:&error] )
 	{	
 		NSLog(@"Failed to install Address Book plug-in for global use");
 		
-		if ( ! [[NSFileManager defaultManager] copyPath:SOURCE_PLUGIN
-												 toPath:USER_PLUGIN
-												handler:nil] )
+		if ( ! [[NSFileManager defaultManager] copyItemAtPath:SOURCE_PLUGIN
+                                                       toPath:USER_PLUGIN
+												error:&error] )
 		{	
 			NSLog(@"Failed to install Address Book plug-in for current user");
-			NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailed"
-																   value:@"Plug-In Install Failed"
-																   table:@"Localizable"],
-							[[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailedExp"
-																   value:nil
-																   table:@"Localizable"],
-							[[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-																   value:@"Cancel"
-																   table:@"Localizable"],
-							nil,
-							nil);
+			showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailed"
+                                                               value:@"Plug-In Install Failed"
+                                                               table:@"Localizable"],
+                        [[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailedExp"
+                                                               value:nil
+                                                               table:@"Localizable"],
+                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
+                                                               value:@"Cancel"
+                                                               table:@"Localizable"]
+                         );
 			
 			return;
 		}
@@ -1399,17 +1406,16 @@
 		];
 	[addressBookPluginMenuItem setAction:@selector(removeAddressBookPlugin:)];
 	
-	NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"PluginInstalled"
-														   value:@"Plug-In Installed"
-														   table:@"Localizable"],
-					[[NSBundle mainBundle] localizedStringForKey:@"PluginInstalledExp"
-														   value:nil
-														   table:@"Localizable"],
-					[[NSBundle mainBundle] localizedStringForKey:@"OK"
-														   value:@"OK"
-														   table:@"Localizable"],
-					nil,
-					nil);
+	showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginInstalled"
+                                                       value:@"Plug-In Installed"
+                                                       table:@"Localizable"],
+                [[NSBundle mainBundle] localizedStringForKey:@"PluginInstalledExp"
+                                                       value:nil
+                                                       table:@"Localizable"],
+                [[NSBundle mainBundle] localizedStringForKey:@"OK"
+                                                       value:@"OK"
+                                                       table:@"Localizable"]
+                 );
 }
 
 - (IBAction)removeAddressBookPlugin:(id)sender
@@ -1424,27 +1430,27 @@
 	}
 	else
 	{
-		if ( [[NSFileManager defaultManager] removeFileAtPath:USER_PLUGIN handler:NULL] )
+        NSError *error;
+        if ( [[NSFileManager defaultManager] removeItemAtPath:USER_PLUGIN error:&error] )
 		{
 			removed = YES;
 		}
-		if ( [[NSFileManager defaultManager] removeFileAtPath:GLOBAL_PLUGIN handler:NULL] )
+		if ( [[NSFileManager defaultManager] removeItemAtPath:GLOBAL_PLUGIN error:&error] )
 		{
 			removed = YES;
 		}
 		if ( removed )
 		{
-			NSRunAlertPanel([[NSBundle mainBundle] localizedStringForKey:@"PluginRemoved"
-																   value:@"Plug-In Removed"
-																   table:@"Localizable"],
-							[[NSBundle mainBundle] localizedStringForKey:@"PluginRemovedExp"
-																   value:nil
-																   table:@"Localizable"],
-							[[NSBundle mainBundle] localizedStringForKey:@"OK"
-																   value:@"OK"
-																   table:@"Localizable"],
-							nil,
-							nil);
+			showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginRemoved"
+                                                               value:@"Plug-In Removed"
+                                                               table:@"Localizable"],
+                        [[NSBundle mainBundle] localizedStringForKey:@"PluginRemovedExp"
+                                                               value:nil
+                                                               table:@"Localizable"],
+                        [[NSBundle mainBundle] localizedStringForKey:@"OK"
+                                                               value:@"OK"
+                                                               table:@"Localizable"]
+                         );
 		}
 		else
 		{
@@ -1717,11 +1723,9 @@
 {
     if ( [barcodePopup indexOfSelectedItem] == 1 )
     {
-        NSRunAlertPanel(@"Australia Post Barcode",
+        showAlert   (@"Australia Post Barcode",
                         @"Snail Mail does not support Australia Post's barcodes, despite being developed in Australia, for Australians, because Australia Post charges tens of thousands of dollars for access to the necessary data, putting it beyond the reach of economical software such as this.",
-                        @"Phooey!",
-                        NULL,
-                        NULL
+                        @"Phooey!"
                         );
         return;
     }

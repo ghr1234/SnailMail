@@ -22,6 +22,17 @@
     return [NSString stringWithFormat:@"Print Snail Mail Envelope"];    
 }
 
+NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButton)
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.alertStyle = NSWarningAlertStyle;
+    alert.messageText     = title;
+    alert.informativeText = msgFormat;
+    
+    [alert runModal];
+    return 0;
+}
+
 - (void)performActionForPerson:(ABPerson *)person identifier:(NSString *)identifier
 {
 	ABMultiValue *personAddresses;
@@ -43,11 +54,10 @@
 		 )
 	{
 		NSLog(@"Snail Mail Address Book plug-in failed to launch Snail Mail application");
-		NSRunAlertPanel(@"Failed to Launch Snail Mail",
+		showAlert   (@"Failed to Launch Snail Mail",
 						@"The plug-in was unable to launch the Snail Mail application.\n\nMake sure there is only one instance of Snail Mail installed (none in the Trash), and log out/in again.",
-						@"Cancel",
-						nil,
-						nil);
+						@"Cancel"
+                     );
 		return;
 	}
 	

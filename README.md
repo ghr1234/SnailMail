@@ -53,7 +53,7 @@ Address Book has been replaced by Contacts so all Address Book APIs should be ch
 =======
 ### 1.92 ###
 
-* Removed use of private methods and associated funtionality since the private methods are non-functional in MacOSX 10.10
+* Removed use of private methods and associated functionality since the private methods are non-functional in MacOSX 10.10
 
 ### 1.91 ###
 

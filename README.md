@@ -43,17 +43,17 @@ As of Jan 4 2011 all of Snail Mail has been opened, and is distributed under the
 For a current list of issues, or to report a new issue, see the [github issue page](https://github.com/knowuh/SnailMail/issues)
 
 Open Issues As of Version 1.93:
-=======
 
 ## Todo List ##
-=======
+
 Address Book has been replaced by Contacts so all Address Book APIs have been deprecated and may not be supported in the future.
 
 ## Change Log ##
-=======
+
 ### 1.93 ###
 
 * Removed plugin - Contacts does not seem to support plugins
+
 June, 2020
 
 ### 1.92 ###
@@ -68,15 +68,9 @@ May, 2020
 * Replaced deprecated objects and methods
 May, 2020
 
-May, 2020
-
 ### 1.9 ###
 
 * Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
-<<<<<<< HEAD
-
-=======
->>>>>>> godfrey
 May, 2020
 
 ###1.8###

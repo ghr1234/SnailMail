@@ -97,12 +97,12 @@
                     <popUpButton verticalHuggingPriority="750" id="956">
                         <rect key="frame" x="125" y="46" width="133" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Address Book" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="959" id="967">
+                        <popUpButtonCell key="cell" type="push" title="Contacts" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="959" id="967">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="957">
                                 <items>
-                                    <menuItem title="Address Book" state="on" id="959"/>
+                                    <menuItem title="Contacts" state="on" id="959"/>
                                     <menuItem title="Manual" id="958"/>
                                     <menuItem title="None" id="960"/>
                                 </items>
@@ -172,14 +172,6 @@
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="Install Address Book Plug-In" id="864">
-                                <connections>
-                                    <action selector="installAddressBookPlugin:" target="285" id="866"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="863">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
                             <menuItem title="Page Setup..." keyEquivalent="P" id="77">
                                 <connections>
                                     <action selector="runPageLayout:" target="285" id="456"/>
@@ -379,7 +371,6 @@
         </menu>
         <customObject id="285" userLabel="SnailMailController" customClass="SnailMailController">
             <connections>
-                <outlet property="addressBookPluginMenuItem" destination="864" id="867"/>
                 <outlet property="backgroundView" destination="922" id="923"/>
                 <outlet property="barcodePopup" destination="896" id="907"/>
                 <outlet property="barcodePositionSwitch" destination="927" id="929"/>

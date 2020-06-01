@@ -1,11 +1,11 @@
 ## Description ##
 
-Snail Mail is an envelope addressing and printing application which interacts directly with the Address Book database in Mac OS X.
+Snail Mail is an envelope addressing and printing application which interacts directly with the Contacts database in Mac OS X.
 
-Snail Mail's primary function is to quickly address and print single or multiple envelopes based on entries in the Mac OS X Address Book database, but it also allows ad-hoc manual entry of addresses directly onto the envelope.
+Snail Mail's primary function is to quickly address and print single or multiple envelopes based on entries in the Mac OS X Contacts database, but it also allows ad-hoc manual entry of addresses directly onto the envelope.
 
-Batches of envelopes can be based on Address Book groups, or ad-hoc selections of addresses. Snail Mail can print USPS barcodes for more efficient mail handling. Snail Mail provides for different default text attributes (font, colour, etc) for different parts of the address.
-Snail Mail also includes a Plugin for Mac OS X's Address Book application so that you can choose to print Snail Mail envelopes directly from the Address Book, and uses Mac OS X 'services' to print any selected text from any other application to an envelope quickly and easily.
+Batches of envelopes can be based on Contacts groups, or ad-hoc selections of addresses. Snail Mail can print USPS barcodes for more efficient mail handling. Snail Mail provides for different default text attributes (font, colour, etc) for different parts of the address.
+Snail Mail uses Mac OS X 'services' to print any selected text from any other application to an envelope quickly and easily.
 
 
 If you are looking for a pre-built binary, try the [github download page](https://github.com/knowuh/SnailMail/downloads).
@@ -18,7 +18,7 @@ If you are looking for a pre-built binary, try the [github download page](https:
 
 
 ## History ##
-Snail Mail was originally developed by Nik Sands, for the office of Mr David Lloyd, at a time when there were no other envelope printing applications available.
+Snail Mail was originally developed by Nik Sands, for the office of Mr David Lloyd, at a time when there were no other envelope printing applications available. It operated on the original Address Book database and continued to operate when Address Book was replaced by the Contacts application.
 
 Nik's other software efforts can be found at <http://nixanz.com/>
 
@@ -34,7 +34,7 @@ Nik's other software efforts can be found at <http://nixanz.com/>
 Original Source Copyright &copy; 2011 Nik Sands
 Original NKDBarcode sourcecode &copy; 2002 Jeff LaMarche and Naked Software.
 
-As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under the
+As of Jan 4 2011 all of Snail Mail has been opened, and is distributed under the
 [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
 
@@ -42,25 +42,36 @@ As of Jan 4 2011 all of Snail Mail's has been opened, and is distributed under t
 
 For a current list of issues, or to report a new issue, see the [github issue page](https://github.com/knowuh/SnailMail/issues)
 
-Open Issues As of Version 1.91:
+Open Issues As of Version 1.93:
 
 ## Todo List##
 
-Look into removing use of private methods
-
-Address Book has been replaced by Contacts so all Address Book APIs should be changed, if possible (but see previous point)
+Address Book has been replaced by Contacts so all Address Book APIs have been deprecated and may not be supported in the future.
 
 ## Change Log ##
+
+=======
+### 1.93 ###
+
+* Removed plugin - Contacts does not seem to support plugins
+June, 2020
+
+### 1.92 ###
+
+* Removed use of private methods and associated functionality since the private methods are non-functional in MacOSX 10.10
+May, 2020
 
 ### 1.91 ###
 
 * Updated to use ARC
 * Removed data-size warnings (replaced int with NSInteger)
 * Replaced deprecated objects and methods
+May, 2020
 
 ### 1.9 ###
 
-* Compiles for 64-bit only. Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+* Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+May, 2020
 
 ###1.8###
 

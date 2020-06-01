@@ -10,7 +10,6 @@
 
 @interface SnailMailController : NSObject <NSToolbarDelegate>
 {
-	IBOutlet NSMenuItem *addressBookPluginMenuItem;
     IBOutlet NSView *printableView;
     IBOutlet NSTextView *fromView;
     IBOutlet NSTextView *toView;
@@ -145,7 +144,6 @@
 - (void)setEnvelopeWindowFrame;
 - (void)selectEnvelopeProfile;
 - (void)invokeEnvelopeProfilesWindow;
-- (oneway void)pluginPrintEnvelopeForPerson:pers address:addr;
 
 - (BOOL)applyMarginsChange;
 - (void)showMargins;
@@ -157,9 +155,6 @@
 - (NSString *)fromSuffix;
 
 #pragma mark IBActions
-
-- (IBAction)installAddressBookPlugin:(id)sender;
-- (IBAction)removeAddressBookPlugin:(id)sender;
 
 - (IBAction)invokeTextAttributesWindow:(id)sender;
 - (IBAction)textAttributesOkay:(id)sender;

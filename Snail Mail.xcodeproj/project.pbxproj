@@ -22,8 +22,6 @@
 		B232F31E12D4008700919C63 /* NSTextAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B232F31312D4008700919C63 /* NSTextAdditions.h */; };
 		B232F31F12D4008700919C63 /* PostalBarcodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = B232F31412D4008700919C63 /* PostalBarcodeGenerator.h */; };
 		B232F32012D4008700919C63 /* SnailMailController.h in Headers */ = {isa = PBXBuildFile; fileRef = B232F31512D4008700919C63 /* SnailMailController.h */; };
-		B232F32312D400BD00919C63 /* SnailMailPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B232F32112D400BD00919C63 /* SnailMailPlugin.h */; };
-		B232F32412D400BD00919C63 /* SnailMailPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = B232F32212D400BD00919C63 /* SnailMailPlugin.m */; };
 		B232F33112D400E700919C63 /* ABPersonAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B232F32512D400E700919C63 /* ABPersonAdditions.m */; };
 		B232F33212D400E700919C63 /* AddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B232F32612D400E700919C63 /* AddressManager.m */; };
 		B232F33312D400E700919C63 /* EnvelopeProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B232F32712D400E700919C63 /* EnvelopeProfile.m */; };
@@ -49,21 +47,8 @@
 		B232F36512D402A900919C63 /* SnailMailPlugin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B232F36112D402A900919C63 /* SnailMailPlugin-Info.plist */; };
 		B232F36612D402A900919C63 /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B232F36212D402A900919C63 /* version.plist */; };
 		DD75E6F906560174007C8C66 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = DD75E67C0655F5DC007C8C66 /* Help */; };
-		DDB0BD6F064B46BB00118B48 /* Snail Mail_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* Snail Mail_Prefix.pch */; };
-		DDB0BE78064B4BDC00118B48 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB0BE77064B4BDC00118B48 /* AddressBook.framework */; };
 		DDB0BE79064B4BDC00118B48 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB0BE77064B4BDC00118B48 /* AddressBook.framework */; };
-		DDC87A3F065B73AF00F56F34 /* SnailMailPlugin.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DDB0BD55064B460000118B48 /* SnailMailPlugin.bundle */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DDA0213509ADBA1500DA3195 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DDB0BD54064B460000118B48;
-			remoteInfo = SnailMailPlugin;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		DDAD46B1063F827A00F74C80 /* CopyFiles */ = {
@@ -97,8 +82,6 @@
 		B232F31312D4008700919C63 /* NSTextAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSTextAdditions.h; path = source/NSTextAdditions.h; sourceTree = "<group>"; };
 		B232F31412D4008700919C63 /* PostalBarcodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostalBarcodeGenerator.h; path = source/PostalBarcodeGenerator.h; sourceTree = "<group>"; };
 		B232F31512D4008700919C63 /* SnailMailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnailMailController.h; path = source/SnailMailController.h; sourceTree = "<group>"; };
-		B232F32112D400BD00919C63 /* SnailMailPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnailMailPlugin.h; path = source/SnailMailPlugin.h; sourceTree = "<group>"; };
-		B232F32212D400BD00919C63 /* SnailMailPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnailMailPlugin.m; path = source/SnailMailPlugin.m; sourceTree = "<group>"; };
 		B232F32512D400E700919C63 /* ABPersonAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABPersonAdditions.m; path = source/ABPersonAdditions.m; sourceTree = "<group>"; };
 		B232F32612D400E700919C63 /* AddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressManager.m; path = source/AddressManager.m; sourceTree = "<group>"; };
 		B232F32712D400E700919C63 /* EnvelopeProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvelopeProfile.m; path = source/EnvelopeProfile.m; sourceTree = "<group>"; };
@@ -130,7 +113,6 @@
 		DD846F6409B39D18002F54B4 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DD846F6509B39D1B002F54B4 /* German */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DD8E67D4063F812700D5D0AB /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		DDB0BD55064B460000118B48 /* SnailMailPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnailMailPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB0BE77064B4BDC00118B48 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -141,14 +123,6 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				DDB0BE79064B4BDC00118B48 /* AddressBook.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DDB0BD53064B460000118B48 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DDB0BE78064B4BDC00118B48 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* Snail Mail.app */,
-				DDB0BD55064B460000118B48 /* SnailMailPlugin.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,7 +177,6 @@
 			children = (
 				DD1A344D07D6980A00EB5460 /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				DDB0BD79064B470900118B48 /* Plugin */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				DDAD46CA063F82D900F74C80 /* Documentation */,
@@ -282,15 +254,6 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
-		DDB0BD79064B470900118B48 /* Plugin */ = {
-			isa = PBXGroup;
-			children = (
-				B232F32112D400BD00919C63 /* SnailMailPlugin.h */,
-				B232F32212D400BD00919C63 /* SnailMailPlugin.m */,
-			);
-			name = Plugin;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -313,15 +276,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDB0BD50064B460000118B48 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DDB0BD6F064B46BB00118B48 /* Snail Mail_Prefix.pch in Headers */,
-				B232F32312D400BD00919C63 /* SnailMailPlugin.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -338,31 +292,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				DDA0213609ADBA1500DA3195 /* PBXTargetDependency */,
 			);
 			name = "Snail Mail";
 			productInstallPath = "$(HOME)/Applications";
 			productName = "Snail Mail";
 			productReference = 8D1107320486CEB800E47090 /* Snail Mail.app */;
 			productType = "com.apple.product-type.application";
-		};
-		DDB0BD54064B460000118B48 /* SnailMailPlugin */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DDD13A6908DFA48400143135 /* Build configuration list for PBXNativeTarget "SnailMailPlugin" */;
-			buildPhases = (
-				DDB0BD50064B460000118B48 /* Headers */,
-				DDB0BD51064B460000118B48 /* Resources */,
-				DDB0BD52064B460000118B48 /* Sources */,
-				DDB0BD53064B460000118B48 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SnailMailPlugin;
-			productName = SnailMailPlugin;
-			productReference = DDB0BD55064B460000118B48 /* SnailMailPlugin.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -395,7 +330,6 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Snail Mail */,
-				DDB0BD54064B460000118B48 /* SnailMailPlugin */,
 			);
 		};
 /* End PBXProject section */
@@ -408,7 +342,6 @@
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				DD75E6F906560174007C8C66 /* Help in Resources */,
 				560876842480B524006770EB /* infoPlist.strings in Resources */,
-				DDC87A3F065B73AF00F56F34 /* SnailMailPlugin.bundle in Resources */,
 				B232F34E12D4026000919C63 /* Change Log.html in Resources */,
 				B232F34F12D4026000919C63 /* Credits.html in Resources */,
 				B232F35012D4026000919C63 /* READ ME.html in Resources */,
@@ -421,13 +354,6 @@
 				B232F35E12D4029900919C63 /* text.tiff in Resources */,
 				B232F36512D402A900919C63 /* SnailMailPlugin-Info.plist in Resources */,
 				B232F36612D402A900919C63 /* version.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DDB0BD51064B460000118B48 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,23 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDB0BD52064B460000118B48 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B232F32412D400BD00919C63 /* SnailMailPlugin.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DDA0213609ADBA1500DA3195 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DDB0BD54064B460000118B48 /* SnailMailPlugin */;
-			targetProxy = DDA0213509ADBA1500DA3195 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
@@ -617,95 +527,6 @@
 			};
 			name = Default;
 		};
-		DDD13A6A08DFA48400143135 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snail Mail_Prefix.pch";
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = "resources/SnailMailPlugin-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nixanz.snailmailplugin;
-				PRODUCT_NAME = SnailMailPlugin;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
-				ZERO_LINK = YES;
-			};
-			name = Development;
-		};
-		DDD13A6B08DFA48400143135 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snail Mail_Prefix.pch";
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = "resources/SnailMailPlugin-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nixanz.snailmailplugin;
-				PRODUCT_NAME = SnailMailPlugin;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
-				ZERO_LINK = NO;
-			};
-			name = Deployment;
-		};
-		DDD13A6C08DFA48400143135 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snail Mail_Prefix.pch";
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = "resources/SnailMailPlugin-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nixanz.snailmailplugin;
-				PRODUCT_NAME = SnailMailPlugin;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
-			};
-			name = Default;
-		};
 		DDD13A6E08DFA48400143135 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -810,35 +631,6 @@
 			};
 			name = Default;
 		};
-		DDE37D3309BE3C4E008D024B /* Deployment Panther */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snail Mail_Prefix.pch";
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = "resources/SnailMailPlugin-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nixanz.snailmailplugin;
-				PRODUCT_NAME = SnailMailPlugin;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
-				ZERO_LINK = NO;
-			};
-			name = "Deployment Panther";
-		};
 		DDE37D3409BE3C4E008D024B /* Deployment Panther */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -923,17 +715,6 @@
 				DDD13A6708DFA48400143135 /* Deployment */,
 				DDE37D3409BE3C4E008D024B /* Deployment Panther */,
 				DDD13A6808DFA48400143135 /* Default */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
-		};
-		DDD13A6908DFA48400143135 /* Build configuration list for PBXNativeTarget "SnailMailPlugin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DDD13A6A08DFA48400143135 /* Development */,
-				DDD13A6B08DFA48400143135 /* Deployment */,
-				DDE37D3309BE3C4E008D024B /* Deployment Panther */,
-				DDD13A6C08DFA48400143135 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;

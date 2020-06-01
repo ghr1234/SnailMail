@@ -2170,28 +2170,8 @@ objectValueForTableColumn:(NSTableColumn *)aColumn row:(int)aRowIndex
 		[peoplePicker selectRecord:[addressDB recordForUniqueId:[[NSUserDefaults standardUserDefaults] objectForKey:@"selected_to_record"]] byExtendingSelection:NO];
     }
 	
-	//  PeoplePicker split view sizes restoring (USES PRIVATE API!!!)
-	if ( [[NSUserDefaults standardUserDefaults] valueForKey:@"groupsPaneWidth"]
-		 && [[NSUserDefaults standardUserDefaults] valueForKey:@"peoplePaneWidth"]
-		 && [peoplePicker respondsToSelector:@selector(_uiController)]
-		 && [[peoplePicker performSelector:@selector(_uiController)] respondsToSelector:@selector(groupsPane)]
-		 && [[peoplePicker performSelector:@selector(_uiController)] respondsToSelector:@selector(peoplePane)]
-		 )
-	{
-		NSRect groupsFrame = [[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(groupsPane)] frame];
-		NSRect peopleFrame = [[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(peoplePane)] frame];
-		groupsFrame.size.width = [[[NSUserDefaults standardUserDefaults] valueForKey:@"groupsPaneWidth"] floatValue];
-		peopleFrame.size.width = [[[NSUserDefaults standardUserDefaults] valueForKey:@"peoplePaneWidth"] floatValue];
-		[[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(groupsPane)] setFrame:groupsFrame];
-		[[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(peoplePane)] setFrame:peopleFrame];
-		[(NSSplitView *)[[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(groupsPane)] superview] adjustSubviews];
-	}
-	
 	[controlWindow makeKeyAndOrderFront:self];
-	
-	//  Make peoplePicker's search field the keyboard focus (USES PRIVATE API!!!)
-	if ( [peoplePicker respondsToSelector:@selector(_searchField)] )
-		[controlWindow makeFirstResponder:[peoplePicker performSelector:@selector(_searchField)]];
+
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
@@ -2239,18 +2219,6 @@ objectValueForTableColumn:(NSTableColumn *)aColumn row:(int)aRowIndex
 	[currentEnvelopeProfile setPrefs:cePrefs];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:envelopeProfiles] forKey:@"envelope_profiles"];
     [[NSUserDefaults standardUserDefaults] setObject:[[envelopeProfiles allKeysForObject:currentEnvelopeProfile] objectAtIndex:0] forKey:@"current_envelope_profile_name"];
-	
-	//  Width of people picker split view panes (USES PRIVATE API!!!)
-	if ( [peoplePicker respondsToSelector:@selector(_uiController)]
-		&& [[peoplePicker performSelector:@selector(_uiController)] respondsToSelector:@selector(groupsPane)]
-		&& [[peoplePicker performSelector:@selector(_uiController)] respondsToSelector:@selector(peoplePane)]
-		)
-	{
-		NSNumber *groupsWidth = [NSNumber numberWithFloat:[[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(groupsPane)] frame].size.width];
-		NSNumber *peopleWidth = [NSNumber numberWithFloat:[[[peoplePicker performSelector:@selector(_uiController)] performSelector:@selector(peoplePane)] frame].size.width];
-		[[NSUserDefaults standardUserDefaults] setValue:groupsWidth forKey:@"groupsPaneWidth"];
-		[[NSUserDefaults standardUserDefaults] setValue:peopleWidth forKey:@"peoplePaneWidth"];
-	}
 
     return NSTerminateNow;
 }

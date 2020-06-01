@@ -22,33 +22,18 @@
 
 #import "SnailMailController.h"
 
-#define SOURCE_PLUGIN   ([[NSBundle mainBundle] pathForResource:@"SnailMailPlugin" ofType:@"bundle"])
-#define GLOBAL_PLUGIN  (@"/Library/Address Book Plug-Ins/SnailMailPlugin.bundle")
-#define USER_PLUGIN  (@"~/Library/Address Book Plug-Ins/SnailMailPlugin.bundle")
-
-
 @implementation SnailMailController
 
 #pragma mark Initialisation
 
 NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButton);
 
-NSConnection *pluginConnection;
-
 - (id)init
 {
 	if (!(self = [super init])) return nil;
 	
 	addressDB = [ABAddressBook sharedAddressBook];
-	
-	//  Create a connection server for the AB SnailMailPlugin to communicate with
-    pluginConnection = [NSConnection new];
-	[pluginConnection setRootObject:self];
-	if ( ! [pluginConnection registerName:@"com_nixanz_snailmail"] )
-	{
-		NSLog(@"Failed to register connection name for plugin communication");
-	}
-	
+
 	//  Set envelope profiles list and current profile
 	
 	if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"envelope_profiles"] == NULL )
@@ -101,23 +86,6 @@ NSConnection *pluginConnection;
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES];
     [controlWindow setToolbar:toolbar];
-	
-	//  Configure AB Plug-In menu item according to whether plug-in is installed or not
-	if ( [[NSFileManager defaultManager] fileExistsAtPath:USER_PLUGIN]
-		 || [[NSFileManager defaultManager] fileExistsAtPath:GLOBAL_PLUGIN]
-		 )
-	{
-		[addressBookPluginMenuItem setTitle:
-			[[NSBundle mainBundle] localizedStringForKey:@"RemovePlugin"
-												   value:@"Remove Address Book Plug-In"
-												   table:@"Localizable"
-				]];
-		[addressBookPluginMenuItem setAction:@selector(removeAddressBookPlugin:)];
-		
-		//  FOR NEXT UPDATE OF PLUG-IN
-		//  INSERT CODE HERE TO
-		//  check plug-in version and re-install/update it if necessary
-	}
 		
 	//  These properties cannot be added in IB, and without them search will not work for person names where the record is for a company
 	[peoplePicker addProperty:kABFirstNameProperty];
@@ -1214,25 +1182,6 @@ NSConnection *pluginConnection;
     [envelopeProfilesWindow orderOut:self];
 }
 
-- (oneway void)pluginPrintEnvelopeForPerson:pers address:addr
-{
-	[peoplePicker deselectAll:self];
-	[toView setString:@""];
-	[barcodeView removeFromSuperview];
-	
-	//  If Snail Mail is not active bring the envelope window to front and activate Snail Mail
-	if ( ! [NSApp isActive] )
-	{
-		[NSApp activateIgnoringOtherApps:YES];
-		[envelopeWindow makeKeyAndOrderFront:self];
-	}
-	
-	[self setToAddress:addr forPerson:pers];
-	[self selectFromAddress];
-	[self addressEnvelope];
-	[self printEnvelope:self];
-}
-
 NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButton)
 {
     NSAlert *alert = [[NSAlert alloc] init];
@@ -1370,102 +1319,6 @@ NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButt
 
 #pragma mark IBActions
 
-- (IBAction)installAddressBookPlugin:(id)sender
-{
-    NSError *error;
-	if ( ! [[NSFileManager defaultManager] copyItemAtPath:SOURCE_PLUGIN
-                                                   toPath:GLOBAL_PLUGIN
-                                                    error:&error] )
-	{	
-		NSLog(@"Failed to install Address Book plug-in for global use");
-		
-		if ( ! [[NSFileManager defaultManager] copyItemAtPath:SOURCE_PLUGIN
-                                                       toPath:USER_PLUGIN
-												error:&error] )
-		{	
-			NSLog(@"Failed to install Address Book plug-in for current user");
-			showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailed"
-                                                               value:@"Plug-In Install Failed"
-                                                               table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"PluginInstallFailedExp"
-                                                               value:nil
-                                                               table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"Cancel"
-                                                               value:@"Cancel"
-                                                               table:@"Localizable"]
-                         );
-			
-			return;
-		}
-	}
-	
-	[addressBookPluginMenuItem setTitle:
-		[[NSBundle mainBundle] localizedStringForKey:@"RemovePlugin"
-											   value:@"Remove Address Book Plug-In"
-											   table:@"Localizable"]
-		];
-	[addressBookPluginMenuItem setAction:@selector(removeAddressBookPlugin:)];
-	
-	showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginInstalled"
-                                                       value:@"Plug-In Installed"
-                                                       table:@"Localizable"],
-                [[NSBundle mainBundle] localizedStringForKey:@"PluginInstalledExp"
-                                                       value:nil
-                                                       table:@"Localizable"],
-                [[NSBundle mainBundle] localizedStringForKey:@"OK"
-                                                       value:@"OK"
-                                                       table:@"Localizable"]
-                 );
-}
-
-- (IBAction)removeAddressBookPlugin:(id)sender
-{
-	BOOL removed = NO;
-	
-	if ( ! [[NSFileManager defaultManager] fileExistsAtPath:USER_PLUGIN]
-		 && ! [[NSFileManager defaultManager] fileExistsAtPath:GLOBAL_PLUGIN]
-		 )
-	{
-		NSLog(@"Plug-in not installed.");
-	}
-	else
-	{
-        NSError *error;
-        if ( [[NSFileManager defaultManager] removeItemAtPath:USER_PLUGIN error:&error] )
-		{
-			removed = YES;
-		}
-		if ( [[NSFileManager defaultManager] removeItemAtPath:GLOBAL_PLUGIN error:&error] )
-		{
-			removed = YES;
-		}
-		if ( removed )
-		{
-			showAlert   ([[NSBundle mainBundle] localizedStringForKey:@"PluginRemoved"
-                                                               value:@"Plug-In Removed"
-                                                               table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"PluginRemovedExp"
-                                                               value:nil
-                                                               table:@"Localizable"],
-                        [[NSBundle mainBundle] localizedStringForKey:@"OK"
-                                                               value:@"OK"
-                                                               table:@"Localizable"]
-                         );
-		}
-		else
-		{
-			NSLog(@"Failed to remove Address Book plug-in");
-			return;
-		}
-	}
-	
-	[addressBookPluginMenuItem setTitle:
-		[[NSBundle mainBundle] localizedStringForKey:@"InstallPlugin"
-											   value:@"Install Address Book Plug-In"
-											   table:@"Localizable"]
-		];
-	[addressBookPluginMenuItem setAction:@selector(installAddressBookPlugin:)];
-}
 
 - (IBAction)invokeTextAttributesWindow:(id)sender
 {

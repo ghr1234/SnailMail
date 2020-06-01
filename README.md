@@ -8,7 +8,7 @@ Batches of envelopes can be based on Contacts groups, or ad-hoc selections of ad
 Snail Mail uses Mac OS X 'services' to print any selected text from any other application to an envelope quickly and easily.
 
 
-If you are looking for a pre-built binary, try the [github download page](https://github.com/ghr1234/SnailMail/releases/tag/v1.93).
+If you are looking for a pre-built binary, try the [releases page](https://github.com/ghr1234/SnailMail/releases/tag/).
 
 ## Features: ##
 

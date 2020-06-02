@@ -42,7 +42,7 @@ As of Jan 4 2011 all of Snail Mail has been opened, and is distributed under the
 
 For a current list of issues, or to report a new issue, see the [github issue page](https://github.com/knowuh/SnailMail/issues)
 
-Open Issues As of Version 1.93:
+Open Issues As of Version 1.94:
 
 ## Todo List ##
 
@@ -50,26 +50,32 @@ Address Book has been replaced by Contacts so all Address Book APIs have been de
 
 ## Change Log ##
 
+### 1.94 ###
+
+* Bug fix when using Return Address drop-down.
+* Documentation updates.  
+June, 2020
+
 ### 1.93 ###
 
-* Removed plugin - Contacts does not seem to support plugins.
+* Removed plugin - Contacts does not seem to support plugins.  
 June, 2020
 
 ### 1.92 ###
 
-* Removed use of private methods and associated functionality since the private methods are non-functional in MacOSX 10.10.
+* Removed use of private methods and associated functionality since the private methods are non-functional in MacOSX 10.10.  
 May, 2020
 
 ### 1.91 ###
 
 * Updated to use ARC
 * Removed data-size warnings (replaced int with NSInteger)
-* Replaced deprecated objects and methods.
+* Replaced deprecated objects and methods.  
 May, 2020
 
 ### 1.9 ###
 
-* Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.
+* Compiles for 64-bit only (Issue #8). Compiles on Mojave (10.14) and Yosemite (10.10) and maybe others in-between.  
 May, 2020
 
 ###1.8###

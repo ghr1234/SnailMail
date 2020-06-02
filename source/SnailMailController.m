@@ -603,7 +603,7 @@ NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButt
     else
         [fromPopup setEnabled:NO];
 
-	if ( [fromTypePopup indexOfSelectedItem] == 1 )
+	if ( [fromTypePopup indexOfSelectedItem] == 1 ) // Manual
 	{
         [fromPopup setHidden:YES];
 		[self setFromAddress:nil];
@@ -614,19 +614,18 @@ NSInteger showAlert (NSString *title, NSString *msgFormat, NSString *defaultButt
         [self selectFromAddress];
 	}
 
-	if ( [fromTypePopup indexOfSelectedItem] == 2 )
+	if ( [fromTypePopup indexOfSelectedItem] == 2 ) // None
 	{
 		if ( [[fromView enclosingScrollView] superview] )
 		{
-			[fromView enclosingScrollView];
-			[[fromView enclosingScrollView] removeFromSuperview];
+			[fromViewScrollView removeFromSuperview];
 		}
 	}
 	else
 	{
 		if ( [[fromView enclosingScrollView] superview] != printableView )
 		{
-			[printableView addSubview:[fromView enclosingScrollView]];
+            [printableView addSubview:fromViewScrollView];
 		}
 	}
 	

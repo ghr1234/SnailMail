@@ -12,6 +12,7 @@
 {
     IBOutlet NSView *printableView;
     IBOutlet NSTextView *fromView;
+    IBOutlet NSScrollView *fromViewScrollView;
     IBOutlet NSTextView *toView;
 	IBOutlet NSTextView *backgroundView;
     IBOutlet NSPopUpButton *fromTypePopup;
@@ -194,18 +195,5 @@
 // Copy & Paste equivalents for non-system-services-compliant contexts
 - (void)copyFromAddressee:(id)sender;
 - (void)pasteToAddressee:(id)sender;
-
-#pragma mark Toolbar
-
-- (void)toolbarWillAddItem:(NSNotification *)notification;
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag;
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar;
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar;
-
-#pragma mark Delegations and Notifications
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
-- (void)applicationWillBecomeActive:(NSNotification *)aNotification;
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 
 @end
